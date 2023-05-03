@@ -21,7 +21,7 @@ jobs:
           Host google-cloud
             HostName $SSH_HOST
             User $SSH_USER
-            IdentifyFile ~/.ssh/google-cloud.key
+            IdentityFile ~/.ssh/google-cloud.key
             StrictHostKeyChecking no
           END
         env:
