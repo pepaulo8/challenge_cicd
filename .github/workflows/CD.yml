@@ -12,7 +12,7 @@ jobs:
     
     steps:
     
-      - name: Configure SSH Google Cloud
+      - name: Configure SSH Google_Cloud
         run: |
           mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/google-cloud.key
