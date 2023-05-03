@@ -16,6 +16,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/google-cloud.key
+          chmod 700 
           chmod 600 ~/.ssh/google-cloud.key
           cat >>~/.ssh/config <<END
           Host google-cloud
