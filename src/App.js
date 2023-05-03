@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Bem vindos ao meu site!
+          Testando aqui a integração com o sonar cloud
         </p>
         <a
           className="App-link"
