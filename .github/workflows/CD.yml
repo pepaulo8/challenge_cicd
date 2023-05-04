@@ -17,6 +17,7 @@ jobs:
           mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/google-cloud.key
           chmod 600 ~/.ssh/google-cloud.key
+          echo "$GOOGLE_CLOUD_SSH_PASSWORD" | sshpass -p "$GOOGLE_CLOUD_SSH_PASSWORD" ssh-add -
           cat >>~/.ssh/config <<END
           Host google-cloud
             HostName $SSH_HOST
@@ -28,6 +29,7 @@ jobs:
           SSH_USER: ${{ secrets.GOOGLE_CLOUD_SSH_USER }}
           SSH_KEY: ${{ secrets.GOOGLE_CLOUD_SSH_KEY }}
           SSH_HOST: ${{ secrets.GOOGLE_CLOUD_SSH_HOST }}
+          GOOGLE_CLOUD_SSH_PASSWORD: ${{ secrets.GOOGLE_CLOUD_SSH_PASSWORD }}
         
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -53,8 +55,9 @@ jobs:
           
       - name: Deploy the aplicattion
         run: |
-          ssh google-cloud 'sudo systemctl stop react-app'
-          ssh google-cloud 'sudo rm -rf /app/react-app'
+          sshpass -p $GOOGLE_CLOUD_SSH_PASSWORD ssh google-cloud 'sudo systemctl stop react-app'
+          sshpass -p $GOOGLE_CLOUD_SSH_PASSWORD ssh google-cloud 'sudo rm -rf /app/react-app'
           scp -r build google-cloud:/home/github/react-app
-          ssh google-cloud 'sudo mv /home/github/react-app /app/react-app'
-          ssh google cloud 'sudo systemctl start react-app'
+          sshpass -p $GOOGLE_CLOUD_SSH_PASSWORD ssh google-cloud 'sudo mv /home/github/react-app /app/react-app'
+          sshpass -p $GOOGLE_CLOUD_SSH_PASSWORD ssh google cloud 'sudo systemctl start react-app'
+
