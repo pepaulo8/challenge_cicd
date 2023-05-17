@@ -49,6 +49,7 @@ jobs:
         run: |
           ssh google-cloud 'sudo systemctl stop react-app-release'
           ssh google-cloud 'sudo rm -rf /app/release-react-app'
+          echo "Current directory on local machine: $(pwd)"
           scp -r build google-cloud:/home/github/react-app
           ssh google-cloud 'sudo mv /home/github/react-app /app/release-react-app'
           ssh google cloud 'sudo systemctl start react-app-release'
