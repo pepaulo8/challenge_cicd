@@ -45,6 +45,9 @@ jobs:
         env:
           CI: true
           
+      - name: Build the application
+        run: npm run build
+          
       - name: Deploy the aplicattion
         run: |
           ssh google-cloud 'sudo systemctl stop react-app-release'
