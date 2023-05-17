@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Testando CI novamente
+          Testando Continuos Delivery in test enviroment
         </p>
         <a
           className="App-link"
